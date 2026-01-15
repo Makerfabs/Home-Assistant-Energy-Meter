@@ -54,7 +54,7 @@ uart:
   baud_rate: 9600
   stop_bits: 1
 
-  external_components:
+external_components:
   - source: 
       type: git
       url: https://github.com/Makerfabs/Home-Assistant-Energy-Meter
