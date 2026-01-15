@@ -4,11 +4,16 @@ esphome:
   min_version: 2025.11.2 # use 2025.11.2
 
 esp32:
-  board: esp32-s3-devkitc1-n16r8
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  cpu_frequency: 240MHz
   framework:
     type: esp-idf
-    version: 5.4.2
-    # version: recommended
+    sdkconfig_options:
+      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
+      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
 
 psram:
   mode: octal
@@ -49,31 +54,6 @@ uart:
   baud_rate: 9600
   stop_bits: 1
 
-# external_components:
-#   - source: 
-#       type: local
-#       path: common_components
-#     components: [bl0942]
-#     refresh: never
-
-# bl0942:
-#   id: my_bl0942
-#   uart_id: uart_bus
-#   update_interval: 1s
-
-
-# sensor:
-#   - platform: bl0942
-#     id: my_bl0942
-#     voltage:
-#       name: "Voltage"
-#     current:
-#       name: "Current"
-#     power:
-#       name: "Active Power"
-#     power_factor:
-#       name: "Power Factor"
-
 
 switch:
   - platform: gpio
@@ -87,7 +67,7 @@ sensor:
   - platform: bl0942
     uart_id: uart_bus
     line_frequency: 50Hz
-    update_interval: 1s
+    update_interval: 5s
     voltage:
       name: 'Voltage'
     current:
